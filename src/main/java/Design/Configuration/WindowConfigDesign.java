@@ -105,7 +105,6 @@ public class WindowConfigDesign {
 
 
         this.mainPanel.add(Box.createVerticalGlue());
-        this.mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
         mainPanel.add(addHeader("Add Window"));
         mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
         mainPanel.add(addInput("Name", 5, 0, textFieldTable));

@@ -16,6 +16,7 @@ import static Design.colors.colorVector; // importing the color from class Color
 
 public class TestHome {
     public static Vector<Window> windowsVector;
+    public static Vector<GardenSection> gardenSections;
 
     public static void main(String[] args) {
         try {
@@ -207,13 +208,34 @@ public class TestHome {
         mainPanel.add(card7, "7");
 
 
+        /// GARDEN PANEL ///
+        JPanel card8 = new JPanel();
+
+        gardenSections = new Vector<>();
+
+        for(int i = 0; i < 6; i++){
+            GardenSection section = new GardenSection("Garden" + i, null, com1);
+            gardenSections.add(section);
+            WaterPump pump1 = new WaterPump("pump1_" + i);
+            WaterPump pump2 = new WaterPump("pump2_" + i);
+
+            section.addWaterPump(pump1);
+            section.addWaterPump(pump2);
+        }
+
+        GardenDesign gardenDesign = new GardenDesign(card8, com1, gardenSections);
+        gardenDesign.addContent();
+
+        mainPanel.add(card8, "8");
+
+
         ///  CONFIGURATION PANEL ///
         JDialog configurationDialog = new JDialog(frame, "Configuration", true);
         configurationDialog.setSize(520, 400);
         JPanel configurationPanel = new JPanel();
         configurationDialog.add(configurationPanel);
 
-        ConfigurationDesign configurationDesign = new ConfigurationDesign(configurationPanel, windowsVector, com1, windowDesign, lightVector, lightDesign);
+        ConfigurationDesign configurationDesign = new ConfigurationDesign(configurationPanel, windowsVector, com1, windowDesign, lightVector, lightDesign, gardenSections, gardenDesign);
         configurationDesign.addComponent();
 
         configItem.addActionListener(new ActionListener() {         // item menu
@@ -236,12 +258,12 @@ public class TestHome {
         JButton button5 = new JButton();
         JButton button6 = new JButton();
 
-        addBottomMenuImage(button1, "src/main/java/window.png");
-        addBottomMenuImage(button2, "src/main/java/gate_small.png");
-        addBottomMenuImage(button3, "src/main/java/alarm.png");
-        addBottomMenuImage(button4, "src/main/java/bul_blank.png");
-        addBottomMenuImage(button5, "src/main/java/home_big1.png");
-        addBottomMenuImage(button6 , "src/main/java/more.png");
+        addBottomMenuImage(button1, "src/main/java/image/window.png");
+        addBottomMenuImage(button2, "src/main/java/image/gate_small.png");
+        addBottomMenuImage(button3, "src/main/java/image/alarm.png");
+        addBottomMenuImage(button4, "src/main/java/image/bul_blank.png");
+        addBottomMenuImage(button5, "src/main/java/image/home_big1.png");
+        addBottomMenuImage(button6 , "src/main/java/image/more.png");
 
 
         button1.addActionListener(e -> cardLayout.show(mainPanel, "1"));
@@ -303,7 +325,7 @@ public class TestHome {
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
 
-        if(imagePath == "src/main/java/more.png"){
+        if(imagePath == "src/main/java/image/more.png"){
             icon.setImage(icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH));
         }
     }
@@ -321,5 +343,7 @@ public class TestHome {
             windowsVector.get(i).openSchedule(hour);
         }
     }
+
+
 
 }

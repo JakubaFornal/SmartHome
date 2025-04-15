@@ -37,9 +37,7 @@ public class MoreConfigDesign {
     public void addContent(){
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         ConfigurationDesign.addHeader("Import Default Objects");
-
         mainPanel.add(Box.createVerticalGlue());
-        mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
         mainPanel.add(ConfigurationDesign.addHeader("Import Default Objects"));
         mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
         mainPanel.add(addCheckBox());

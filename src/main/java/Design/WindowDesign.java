@@ -291,8 +291,8 @@ public class WindowDesign {
 
 
             // Menu INNER //
-            ImageIcon arrow_right = new ImageIcon("src/main/java/arrow.png");
-            ImageIcon arrow_left = new ImageIcon("src/main/java/arrow_left.png");
+            ImageIcon arrow_right = new ImageIcon("src/main/java/image/arrow.png");
+            ImageIcon arrow_left = new ImageIcon("src/main/java/image/arrow_left.png");
 
             JPanel menuPanel = new JPanel();
             JButton panel1 = new JButton(arrow_left);

@@ -32,7 +32,6 @@ public class LightConfigDesign {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         mainPanel.add(Box.createVerticalGlue());
-        mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
         mainPanel.add(addHeader("Add Light"));
         mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
         mainPanel.add(addInput("Name", 5, 0, textFieldTable));

@@ -38,12 +38,12 @@ public class PanelsDesign {
         scrollP.setBorder(null);
 
               // GATE
-        addButton("src/main/java/animal_panel.png", "4");       //ANIMAL FEEDING
-        addButton("src/main/java/gate_panel.png", "2");
-        addButton("src/main/java/garden_panel.png", "5");
-        addButton("src/main/java/heating_panel.png", "5");
-        addButton("src/main/java/blinds_panel.png", "5");
-        addButton("src/main/java/devices_panel.png", "5");
+        addButton("src/main/java/image/animal_panel.png", "4");       //ANIMAL FEEDING
+        addButton("src/main/java/image/gate_panel.png", "2");
+        addButton("src/main/java/image/garden_panel.png", "8");
+        addButton("src/main/java/image/heating_panel.png", "2");
+        addButton("src/main/java/image/blinds_panel.png", "5");
+        addButton("src/main/java/image/devices_panel.png", "5");
         mainPanel.add(scrollP);
 
     }

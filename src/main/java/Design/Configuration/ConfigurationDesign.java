@@ -1,7 +1,9 @@
 package Design.Configuration;
 
+import Design.GardenDesign;
 import Design.LightDesign;
 import Design.WindowDesign;
+import Objects.GardenSection;
 import Objects.Light;
 import Objects.Window;
 import Objects.comment;
@@ -34,15 +36,18 @@ public class ConfigurationDesign {
     private JTextField openTimeArea;
     private LightDesign lightDesign;
     private Vector<Light> lightVector;
+    private Vector<GardenSection> gardenSectionVector;
+    private GardenDesign gardenDesign;
 
-
-    public ConfigurationDesign( JPanel mainPanel, Vector<Window> windowsVector, comment com, WindowDesign windowDesign, Vector<Light> lightVector, LightDesign lightDesign ) {
+    public ConfigurationDesign( JPanel mainPanel, Vector<Window> windowsVector, comment com, WindowDesign windowDesign, Vector<Light> lightVector, LightDesign lightDesign,  Vector<GardenSection> gardenSectionVector, GardenDesign gardenDesign) {
         this.mainPanel = mainPanel;
         this.com = com;
         this.windowDesign = windowDesign;
         this.windowsVector = windowsVector;
         this.lightVector = lightVector;
         this.lightDesign = lightDesign;
+        this.gardenSectionVector = gardenSectionVector;
+        this.gardenDesign = gardenDesign;
     }
 
     public void  addComponent() {
@@ -69,11 +74,12 @@ public class ConfigurationDesign {
         MenuPanel.setPreferredSize(new Dimension(115, 400));
 
 
-        this.buttonsTable = new JButton[4];         // to store the buttons from the function
-       addItemButton("Window", 1, "src/main/java/alarm.png");
-       addItemButton("Light", 2, "src/main/java/bul_blank.png");
-       addItemButton("Users", 3, "src/main/java/bul_blank.png");
-       addItemButton("More", 4, "src/main/java/bul_blank.png");
+        this.buttonsTable = new JButton[10];         // to store the buttons from the function
+       addItemButton("Window", 1, "src/main/java/image/alarm.png");
+       addItemButton("Light", 2, "src/main/java/image/bul_blank.png");
+       addItemButton("Garden", 5, "src/main/java/image/bul_blank.png");
+       addItemButton("Users", 3, "src/main/java/image/bul_blank.png");
+       addItemButton("More", 4, "src/main/java/image/bul_blank.png");
        buttonsTable[0].setBackground(colorVector.get(1));
 
         MenuPanel.setBorder(new EmptyBorder(new Insets(0, 0, 40, 0)));
@@ -82,11 +88,12 @@ public class ConfigurationDesign {
         //***// CONTENT PANEL //***//
         this.cardLayout = new CardLayout();
         this.contentPanel = new JPanel(cardLayout);
-        this.cardTableP = new JPanel[4];                                // to store card from tabs
+        this.cardTableP = new JPanel[10];                                // to store card from tabs
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         this.textFieldTable = new JTextField[10];                       // to
         addCard(1, "Window");
         addCard(2, "Light");
+        addCard(5, "Garden");
         addCard(3, "Users");
         addCard(4, "More");
 
@@ -103,17 +110,21 @@ public class ConfigurationDesign {
 
         //***// LIGHT PANEL //***//
         JPanel LightPanel = cardTableP[1];
-        WindowPanel.setLayout(new BoxLayout(WindowPanel, BoxLayout.Y_AXIS));
 
         LightConfigDesign lightConfigDesign = new LightConfigDesign(LightPanel, com, lightVector,  lightDesign);
         lightConfigDesign.addContent();
+
+        //***// GARDEN PANEL //***//
+        JPanel GardenPanel = cardTableP[4];
+
+        GardenConfigDesign gardenConfigDesign = new GardenConfigDesign(GardenPanel, com, gardenSectionVector, gardenDesign);
+        gardenConfigDesign.addContent();
 
 
 
 
         //***// MORE PANEL //***//
         JPanel MorePanel = cardTableP[3];
-        WindowPanel.setLayout(new BoxLayout(WindowPanel, BoxLayout.Y_AXIS));
 
         MoreConfigDesign moreConfigDesign = new MoreConfigDesign(MorePanel, com,  lightVector, windowsVector, lightDesign, windowDesign);
         moreConfigDesign.addContent();
@@ -132,6 +143,7 @@ public class ConfigurationDesign {
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         JLabel titleLabel = new JLabel(title);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 21));
+        panel.setBorder(new EmptyBorder(new Insets(30, 0, 10, 0)));
         panel.add(titleLabel);
 
        return panel;
