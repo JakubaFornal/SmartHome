@@ -14,8 +14,10 @@ public class colors {
         colorVector.add(Color.decode("#BCBCBC"));       // 2. silver
         colorVector.add(Color.decode("#FF6B27"));       // 3. orange
         colorVector.add(Color.decode("#B5EBFF"));       // 4. light blue
+        colorVector.add(Color.decode("#4DD300"));      // 5. Green
 
-        colorVector.add(Color.GREEN);
+
+        colorVector.add(Color.GREEN); //??
         colorVector.add(Color.BLUE);
     }
 

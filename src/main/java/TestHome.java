@@ -1,5 +1,6 @@
 import Design.*;
 import Design.Configuration.ConfigurationDesign;
+import Design.Configuration.MoreConfigDesign;
 import Objects.*;
 import Objects.Window;
 
@@ -17,6 +18,8 @@ import static Design.colors.colorVector; // importing the color from class Color
 public class TestHome {
     public static Vector<Window> windowsVector;
     public static Vector<GardenSection> gardenSections;
+    public static Vector<Light> lightVector;
+    public static ConfigurationDesign configurationDesign;
 
     public static void main(String[] args) {
         try {
@@ -192,8 +195,8 @@ public class TestHome {
 
         /// LIGHT PANEL ///
         JPanel card7 = new JPanel();
-
-        Vector<Light> lightVector = new Vector<>();
+        lightVector = new Vector<>();
+        Alarm1.setLightsVector(lightVector);
         /*
         for(int i = 0; i < 14; i++){
             Light light = new Light("Room" + i, null, com1);
@@ -213,7 +216,8 @@ public class TestHome {
 
         gardenSections = new Vector<>();
 
-        for(int i = 0; i < 6; i++){
+
+        for(int i = 0; i < 0; i++){
             GardenSection section = new GardenSection("Garden" + i, null, com1);
             gardenSections.add(section);
             WaterPump pump1 = new WaterPump("pump1_" + i);
@@ -226,6 +230,13 @@ public class TestHome {
         GardenDesign gardenDesign = new GardenDesign(card8, com1, gardenSections);
         gardenDesign.addContent();
 
+
+        for(GardenSection section : gardenSections){
+            section.setGardenDesign(gardenDesign);
+        }
+
+        //configurationDesign.setMoreConfig(gardenSections, gardenDesign);            // move it below
+
         mainPanel.add(card8, "8");
 
 
@@ -235,7 +246,7 @@ public class TestHome {
         JPanel configurationPanel = new JPanel();
         configurationDialog.add(configurationPanel);
 
-        ConfigurationDesign configurationDesign = new ConfigurationDesign(configurationPanel, windowsVector, com1, windowDesign, lightVector, lightDesign, gardenSections, gardenDesign);
+        configurationDesign = new ConfigurationDesign(configurationPanel, windowsVector, com1, windowDesign, lightVector, lightDesign, gardenSections, gardenDesign);
         configurationDesign.addComponent();
 
         configItem.addActionListener(new ActionListener() {         // item menu
@@ -243,6 +254,7 @@ public class TestHome {
                 configurationDialog.setVisible(true);
             }
         });
+
 
 
         /// //**// MENU BOTTOM //**// ///
@@ -285,6 +297,7 @@ public class TestHome {
 
 
         while(true) {
+
                 int hour = VTime.getHour();                     // Time
                 System.out.println(hour);
                 VTime.setHour(VTime.getHour() + 1);
@@ -305,6 +318,20 @@ public class TestHome {
                 checkWindowCloseTime(hour);
                 checkWindowOpenTime(hour);
 
+                gardenDesign.updateHour(hour);              // Garden
+                gardenDesign.checkSectionCloseTime(hour);
+                gardenDesign.checkAllSectionsStatus();
+                gardenDesign.checkOpenTime(hour);
+                //System.out.println(gardenDesign.getClosedStatus());
+                //System.out.println(gardenSections.getFirst().getVector().getFirst().getStatus());
+
+            if(hour == 10){
+                for(GardenSection section : gardenSections){
+                    System.out.println(section.getName() + " " + section.getButton().getText());
+                }
+            }
+
+            lightVector.add(new Light("kuba", new JButton(), com1));
 
                 try {
                     Thread.sleep(1000);             // Delay settings

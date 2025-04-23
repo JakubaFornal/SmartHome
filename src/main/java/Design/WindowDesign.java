@@ -1,5 +1,6 @@
 package Design;
 
+import Objects.GardenSection;
 import Objects.Window;
 import Objects.comment;
 
@@ -459,6 +460,7 @@ public class WindowDesign {
         mainPanel.revalidate(); // Recalculate layout
         mainPanel.repaint(); // Repaint to reflect changes
     }
+
 
 
 

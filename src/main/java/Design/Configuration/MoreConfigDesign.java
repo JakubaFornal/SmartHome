@@ -1,10 +1,10 @@
 package Design.Configuration;
 
+import Design.GardenDesign;
 import Design.LightDesign;
 import Design.WindowDesign;
-import Objects.Light;
+import Objects.*;
 import Objects.Window;
-import Objects.comment;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +24,9 @@ public class MoreConfigDesign {
     private  JCheckBox[] checkBoxes;
     private WindowDesign windowDesign;
     private LightDesign lightDesign;
+    private Vector<GardenSection> SectionsVector;
+    private Vector<WaterPump> waterPumpsVector;
+    private GardenDesign gardenDesign;
 
     public MoreConfigDesign(JPanel mainPanel, comment com, Vector<Light> lightVector, Vector<Window> windowVector, LightDesign lightDesign, WindowDesign windowDesign) {
         this.mainPanel = mainPanel;
@@ -50,7 +53,7 @@ public class MoreConfigDesign {
     private JPanel addCheckBox(){
         JPanel checkBoxPanel = new JPanel();
         checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.Y_AXIS));
-        this.checkBoxes = new JCheckBox[2];
+        this.checkBoxes = new JCheckBox[5];
         JPanel box1 = new JPanel();
         box1.setLayout(new FlowLayout(FlowLayout.CENTER));
         checkBoxes[0] = new JCheckBox("Import Windows");
@@ -61,11 +64,18 @@ public class MoreConfigDesign {
         checkBoxes[1] = new JCheckBox("Import Lights");
         box2.add(checkBoxes[1]);
 
+        JPanel box3 = new JPanel();
+        box3.setLayout(new FlowLayout(FlowLayout.CENTER));
+        checkBoxes[2] = new JCheckBox("Import Sections and Pumps");
+        box3.add(checkBoxes[2]);
+
         checkBoxes[0].setFont(new Font("Arial", Font.BOLD, 17));
         checkBoxes[1].setFont(new Font("Arial", Font.BOLD, 17));
+        checkBoxes[2].setFont(new Font("Arial", Font.BOLD, 17));
 
         checkBoxPanel.add(box1);
         checkBoxPanel.add(box2);
+        checkBoxPanel.add(box3);
         return checkBoxPanel;
     }
 
@@ -86,6 +96,10 @@ public class MoreConfigDesign {
 
                 if (checkBoxes[1].isSelected()) {
                     importLight();
+                }
+
+                if (checkBoxes[2].isSelected()) {
+                    importGarden();
                 }
             }
         });
@@ -141,7 +155,39 @@ public class MoreConfigDesign {
         }
         lightDesign.refreshPanel();
 
+
         com.setComentCom1("Lights Imported");
+    }
+
+    public void importGarden(){
+        if(SectionsVector != null){
+            SectionsVector.clear();
+        }
+
+        String[] section = {
+                "Front Yard 1",
+                "Front Yard 2",
+                "East Garden",
+                "Bathroom",
+                "Back Yard",
+                "Back Yard",
+        };
+
+        for(int i = 0; i < section.length; i++){
+            GardenSection section_temp = new GardenSection(section[i], null, com);
+            SectionsVector.add(section_temp);
+        }
+        gardenDesign.refreshPanel();
+
+
+        com.setComentCom1("Garden Imported");
+    }
+
+
+
+    public void getGardenVectors(Vector<GardenSection> gardenSections, GardenDesign gardenDesign){
+        this.SectionsVector = gardenSections;
+        this.gardenDesign = gardenDesign;
     }
 
 }

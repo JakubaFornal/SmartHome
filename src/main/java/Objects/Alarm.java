@@ -1,5 +1,6 @@
 package Objects;
 import javax.swing.*;
+import java.util.Vector;
 
 public class Alarm {
     boolean active = false;
@@ -11,6 +12,7 @@ public class Alarm {
     boolean turnAllLights = false;
     boolean turnOnSyrene = false;
     boolean notifiedAlarm = false;
+    private Vector<Light> lightVector;
 
     private JLabel statusLabel;         // Design
     private JButton alarmButton;
@@ -34,6 +36,7 @@ public class Alarm {
             active = true;
             comment.setComentCom1(hour + ":00 Alarm Activated automatically.");
             this.changeStatusv2();
+            turnOffLights();
         }
     }
 
@@ -43,6 +46,7 @@ public class Alarm {
             active = false;
             comment.setComentCom1(hour + ":00 Alarm Deactivated automatically");
             this.changeStatusv2();
+
         }
     }
 
@@ -59,6 +63,7 @@ public class Alarm {
             comment.setComentCom1("Alarm activated");
             alarmButton.setText(this.getStatusButton());
             statusLabel.setText(this.getStatus());
+            turnOffLights();
         }
         notifiedAlarm = false;
         interrupted = false;
@@ -160,6 +165,22 @@ public class Alarm {
             //comment.setComentCom1("Syrene Set ON");
         }
     }
+
+    public void turnOffLights(){
+        System.out.println("light: " + lightVector.size());
+        if(lightVector.size() > 0){
+            for(Light l : lightVector){
+                l.turnOFF();
+            }
+            comment.setComentCom1("All Lights turn OFF");
+        }
+
+    }
+
+    public void setLightsVector(Vector<Light> lights){
+        this.lightVector = lights;
+    }
+
 
 
 }

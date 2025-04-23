@@ -3,10 +3,8 @@ package Design.Configuration;
 import Design.GardenDesign;
 import Design.LightDesign;
 import Design.WindowDesign;
-import Objects.GardenSection;
-import Objects.Light;
+import Objects.*;
 import Objects.Window;
-import Objects.comment;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -38,6 +36,7 @@ public class ConfigurationDesign {
     private Vector<Light> lightVector;
     private Vector<GardenSection> gardenSectionVector;
     private GardenDesign gardenDesign;
+    private MoreConfigDesign moreConfigDesign;
 
     public ConfigurationDesign( JPanel mainPanel, Vector<Window> windowsVector, comment com, WindowDesign windowDesign, Vector<Light> lightVector, LightDesign lightDesign,  Vector<GardenSection> gardenSectionVector, GardenDesign gardenDesign) {
         this.mainPanel = mainPanel;
@@ -126,7 +125,7 @@ public class ConfigurationDesign {
         //***// MORE PANEL //***//
         JPanel MorePanel = cardTableP[3];
 
-        MoreConfigDesign moreConfigDesign = new MoreConfigDesign(MorePanel, com,  lightVector, windowsVector, lightDesign, windowDesign);
+        moreConfigDesign = new MoreConfigDesign(MorePanel, com,  lightVector, windowsVector, lightDesign, windowDesign);
         moreConfigDesign.addContent();
 
 
@@ -213,5 +212,10 @@ public class ConfigurationDesign {
 
         currIndex = index;
     }
+
+    public void setMoreConfig(Vector<GardenSection> gardenSections, GardenDesign gardenDesign){
+        moreConfigDesign.getGardenVectors(gardenSections, gardenDesign);
+    }
+
 
 }

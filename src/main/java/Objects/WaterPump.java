@@ -1,7 +1,7 @@
 package Objects;
 
 public class WaterPump {
-    private boolean status;
+    private boolean status = false;
     private String name;
     private GardenSection gardenSection;
 
@@ -30,6 +30,15 @@ public class WaterPump {
     public String getName() {
         return name;
     }
+
+    public void setOpen(){
+        status = true;
+    }
+
+    public void setClose(){
+        status = false;
+    }
+
 
 
 

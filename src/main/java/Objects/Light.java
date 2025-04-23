@@ -14,6 +14,7 @@ public class Light {
         this.name = name;
         this.statusButton = statusButton;
         this.com = com;
+        this.status = false;
     }
 
     public String getName() {
@@ -47,6 +48,11 @@ public class Light {
         statusButton.setText(getName());
         com.setComentCom1("Light " + getName() + " is " + getStatusShort());
         changeButtonColor();
+    }
+
+    public void turnOFF(){
+        status = false;
+        statusButton.setBackground(Color.red);
     }
 
 }

@@ -27,6 +27,7 @@ public class GardenConfigDesign {
     private JTextField[] textFieldTable = new JTextField[10];
     private GardenDesign gardeDesign;
     private JComboBox comboBox;
+    private JPanel comboPanel;
 
 
     public GardenConfigDesign(JPanel mainPanel, comment com, Vector<GardenSection> gardenSectionVector, GardenDesign gardenDesign) {
@@ -57,7 +58,7 @@ public class GardenConfigDesign {
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
-        JPanel comboPanel = new JPanel();
+        comboPanel = new JPanel();
         comboPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         JLabel comboLabel = new JLabel("Section: ");
@@ -65,12 +66,8 @@ public class GardenConfigDesign {
         comboPanel.add(comboLabel);
 
         comboBox = new JComboBox<>();
-        for (GardenSection s :  gardenSectionVector) {
-            comboBox.addItem(s.getName());
-        }
-        comboBox.setFont(new Font("Arial", Font.PLAIN, 16));
+        getCombo();
         comboPanel.add(comboBox);
-
 
         contentPanel.add(addHeader("Add Pump"));
         contentPanel.add(Box.createRigidArea(new Dimension(10, 20)));
@@ -112,6 +109,17 @@ public class GardenConfigDesign {
         return buttonPanel;
     }
 
+    public void getCombo(){
+        comboBox.removeAllItems();
+        for (GardenSection s :  gardenSectionVector) {
+            if(s.getName() != "AllSection"){
+                comboBox.addItem(s.getName());
+            }
+
+        }
+        comboBox.setFont(new Font("Arial", Font.PLAIN, 16));
+    }
+
     public JPanel cardSectionDesign(){
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -147,8 +155,9 @@ public class GardenConfigDesign {
             public void actionPerformed(ActionEvent e) {
                 if(!textFieldTable[1].getText().isEmpty()){
                     GardenSection gardenSection = new GardenSection(textFieldTable[1].getText(), null, com);
-                    gardenSectionVector.add(gardenSection);
+                    gardenSectionVector.add(gardenSectionVector.size() - 1 ,gardenSection);
                     com.setComentCom1("New Section: " + gardenSection.getName());
+                    getCombo();
                 }
 
                 gardeDesign.refreshPanel();
